@@ -1,6 +1,10 @@
 package domain
 
-import "time"
+import (
+	"time"
+
+	"github.com/Friske2/pokemon-api/dto"
+)
 
 type Monters struct {
 	ID          int       `json:"id"`
@@ -14,14 +18,14 @@ type MontersRepository interface {
 	FindAll(m *[]Monters) error
 	GetById(id int, m *Monters) error
 	Insert(m *Monters) error
-	Update(m *Monters) error
-	Delete(m *Monters) error
+	Update(id int, body *map[string]interface{}) error
+	Delete(id int) error
 }
 
 type MontersService interface {
 	FindAll() ([]Monters, error)
 	GetById(id int) (Monters, error)
 	Insert(monters Monters) (int, error)
-	Update(monters Monters) error
+	Update(id int, body dto.MonterValue) error
 	Delete(id int) error
 }
