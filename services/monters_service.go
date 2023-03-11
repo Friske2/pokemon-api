@@ -1,8 +1,6 @@
 package services
 
 import (
-	"time"
-
 	"github.com/Friske2/pokemon-api/domain"
 	"github.com/Friske2/pokemon-api/dto"
 )
@@ -37,10 +35,7 @@ func (s *MonterService) GetById(id int) (domain.Monters, error) {
 
 func (s *MonterService) Insert(monters domain.Monters) (int, error) {
 	body := domain.Monters{
-		Name:        monters.Name,
-		CreatedDate: time.Now(),
-		CreatedBy:   "system",
-		Enabled:     true,
+		Name: monters.Name,
 	}
 	err := s.monterRepo.Insert(&body)
 	if err != nil {
