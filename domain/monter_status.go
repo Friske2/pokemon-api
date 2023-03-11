@@ -6,3 +6,11 @@ type MonterStatus struct {
 	StatusId int `json:"statusId"`
 	MonterId int `json:"monterId"`
 }
+
+type MonterStatusRepository interface {
+	FindMonterStatusByMonterId(monterId int, m *[]MonterStatus) error
+	Insert(body []MonterStatus) error
+	DeleteByMonterId(monterId int) error
+	Update(body MonterStatus) error
+	Delete(id int) error
+}

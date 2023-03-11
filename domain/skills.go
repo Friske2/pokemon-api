@@ -9,3 +9,11 @@ type Skills struct {
 	Accuracy        int `json:"accuracy"`
 	SkillLearnId    int `json:"skillLearnId"`
 }
+
+type SkillRepository interface {
+	FindAll(m *[]Skills) error
+	GetById(id int, m *Skills) error
+	Insert(m Skills) error
+	Update(body Skills) error
+	Delete(id int) error
+}
