@@ -1,17 +1,14 @@
 package domain
 
 import (
-	"time"
-
 	"github.com/Friske2/pokemon-api/dto"
 )
 
 type Monters struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	CreatedDate time.Time `json:"created_date"`
-	CreatedBy   string    `json:"created_by"`
-	Enabled     bool      `json:"enabled"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	TypeId   int    `json:"typeId"`
+	GenderId int    `json:"genderId"`
 }
 
 type MontersRepository interface {
