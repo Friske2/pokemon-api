@@ -17,7 +17,7 @@ func NewMontersRepo(db *gorm.DB) domain.MontersRepository {
 
 func (m *montersRepo) FindAll(monters *[]domain.Monters) error {
 	// find all
-	res := m.DB.Where("enabled = ?", true).Find(&monters)
+	res := m.DB.Find(&monters)
 	if res.Error != nil {
 		return res.Error
 	}
