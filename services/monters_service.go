@@ -5,17 +5,17 @@ import (
 	"github.com/Friske2/pokemon-api/dto"
 )
 
-type MonterService struct {
+type monterService struct {
 	monterRepo domain.MontersRepository
 }
 
 func NewMontersService(m domain.MontersRepository) domain.MontersService {
-	return &MonterService{
+	return &monterService{
 		monterRepo: m,
 	}
 }
 
-func (s *MonterService) FindAll() ([]domain.Monters, error) {
+func (s *monterService) FindAll() ([]domain.Monters, error) {
 	monters := []domain.Monters{}
 	err := s.monterRepo.FindAll(&monters)
 	if err != nil {
@@ -24,7 +24,7 @@ func (s *MonterService) FindAll() ([]domain.Monters, error) {
 	return monters, nil
 }
 
-func (s *MonterService) GetById(id int) (domain.Monters, error) {
+func (s *monterService) GetById(id int) (domain.Monters, error) {
 	monters := domain.Monters{}
 	err := s.monterRepo.GetById(id, &monters)
 	if err != nil {
@@ -33,7 +33,7 @@ func (s *MonterService) GetById(id int) (domain.Monters, error) {
 	return monters, nil
 }
 
-func (s *MonterService) Insert(monters domain.Monters) (int, error) {
+func (s *monterService) Insert(monters domain.Monters) (int, error) {
 	body := domain.Monters{
 		Name: monters.Name,
 	}
@@ -44,7 +44,7 @@ func (s *MonterService) Insert(monters domain.Monters) (int, error) {
 	return body.ID, nil
 }
 
-func (s *MonterService) Update(id int, body dto.MonterValue) error {
+func (s *monterService) Update(id int, body dto.MonterValue) error {
 	monters := domain.Monters{
 		ID: id,
 	}
@@ -65,7 +65,7 @@ func (s *MonterService) Update(id int, body dto.MonterValue) error {
 	return nil
 }
 
-func (s *MonterService) Delete(id int) error {
+func (s *monterService) Delete(id int) error {
 	err := s.monterRepo.Delete(id)
 	if err != nil {
 		return err
