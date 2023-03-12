@@ -50,6 +50,17 @@ func TestGenderRepo(t *testing.T) {
 		assert.Equal(t, expect, payload)
 	})
 
+	t.Run("GetByIdNotFound", func(t *testing.T) {
+		// Arrange
+		genderRepo := repository.NewGenderRepoMock()
+		genderRepo.On("GetById").Return(domain.Gender{}, domain.ErrNotFound)
+		// Act
+		genderService := services.NewGenderService(genderRepo)
+		// Assert
+		_, err := genderService.GetById(1)
+		assert.Equal(t, domain.ErrNotFound, err)
+	})
+
 	t.Run("Insert", func(t *testing.T) {
 		// Arrange
 		genderRepo := repository.NewGenderRepoMock()

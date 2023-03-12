@@ -26,6 +26,9 @@ func (s *genderService) GetById(id int) (domain.Gender, error) {
 	if err != nil {
 		return result, err
 	}
+	if result.ID == 0 {
+		return result, domain.ErrNotFound
+	}
 	return result, nil
 }
 func (s *genderService) Insert(name string) error {
@@ -36,12 +39,9 @@ func (s *genderService) Insert(name string) error {
 	return err
 }
 func (s *genderService) Update(id int, name string) error {
-	res, err := s.GetById(id)
+	_, err := s.GetById(id)
 	if err != nil {
 		return err
-	}
-	if res.ID == 0 {
-		return domain.ErrNotFound
 	}
 	err = s.genderRepo.Update(id, name)
 	if err != nil {
@@ -50,12 +50,9 @@ func (s *genderService) Update(id int, name string) error {
 	return nil
 }
 func (s *genderService) Delete(id int) error {
-	res, err := s.GetById(id)
+	_, err := s.GetById(id)
 	if err != nil {
 		return err
-	}
-	if res.ID == 0 {
-		return domain.ErrNotFound
 	}
 	err = s.genderRepo.Delete(id)
 	if err != nil {
