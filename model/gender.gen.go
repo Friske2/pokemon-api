@@ -8,8 +8,8 @@ const TableNameGender = "gender"
 
 // Gender mapped from table <gender>
 type Gender struct {
-	ID   int32   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name *string `gorm:"column:name" json:"name"`
+	ID   int32  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Name string `gorm:"column:name;not null" json:"name"`
 }
 
 // TableName Gender's table name

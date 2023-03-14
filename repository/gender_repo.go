@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Friske2/pokemon-api/domain"
+	"github.com/Friske2/pokemon-api/model"
 	"gorm.io/gorm"
 )
 
@@ -16,7 +17,7 @@ func NewGenderRepo(db *gorm.DB) domain.GenderRepository {
 }
 
 // Find All
-func (r *genderRepo) FindAll(genders *[]domain.Gender) error {
+func (r *genderRepo) FindAll(genders *[]model.Gender) error {
 	res := r.DB.Find(&genders)
 	if res.Error != nil {
 		return res.Error
@@ -25,7 +26,7 @@ func (r *genderRepo) FindAll(genders *[]domain.Gender) error {
 }
 
 // Find ById
-func (r *genderRepo) GetById(id int, gender *domain.Gender) error {
+func (r *genderRepo) GetById(id int, gender *model.Gender) error {
 	res := r.DB.First(&gender, id)
 	if res.Error != nil {
 		return res.Error
@@ -35,7 +36,7 @@ func (r *genderRepo) GetById(id int, gender *domain.Gender) error {
 
 // Insert Gender
 func (r *genderRepo) Insert(name string) error {
-	res := r.DB.Create(&domain.Gender{Name: name})
+	res := r.DB.Create(&model.Gender{Name: name})
 	if res.Error != nil {
 		return res.Error
 	}
@@ -47,7 +48,7 @@ func (r *genderRepo) Update(id int, name string) error {
 	body := map[string]interface{}{
 		"name": name,
 	}
-	res := r.DB.Model(&domain.Gender{}).Where("id = ?", id).Updates(body)
+	res := r.DB.Model(&model.Gender{}).Where("id = ?", id).Updates(body)
 	if res.Error != nil {
 		return res.Error
 	}
@@ -56,7 +57,7 @@ func (r *genderRepo) Update(id int, name string) error {
 
 // Delete Gender
 func (r *genderRepo) Delete(id int) error {
-	res := r.DB.Where("id = ?", id).Delete(&domain.Gender{})
+	res := r.DB.Where("id = ?", id).Delete(&model.Gender{})
 	if res.Error != nil {
 		return res.Error
 	}

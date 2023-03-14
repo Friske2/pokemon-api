@@ -1,21 +1,18 @@
 package domain
 
-type Gender struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
+import "github.com/Friske2/pokemon-api/model"
 
 type GenderRepository interface {
-	FindAll(m *[]Gender) error
-	GetById(id int, m *Gender) error
+	FindAll(m *[]model.Gender) error
+	GetById(id int, m *model.Gender) error
 	Insert(name string) error
 	Update(id int, name string) error
 	Delete(id int) error
 }
 
 type GenderService interface {
-	FindAll() ([]Gender, error)
-	GetById(id int) (Gender, error)
+	FindAll() ([]model.Gender, error)
+	GetById(id int) (model.Gender, error)
 	Insert(name string) error
 	Update(id int, name string) error
 	Delete(id int) error

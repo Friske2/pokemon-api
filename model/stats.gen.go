@@ -8,13 +8,13 @@ const TableNameStat = "stats"
 
 // Stat mapped from table <stats>
 type Stat struct {
-	ID      int32  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Hp      *int32 `gorm:"column:hp" json:"hp"`
-	Speed   *int32 `gorm:"column:speed" json:"speed"`
-	Atk     *int32 `gorm:"column:atk" json:"atk"`
-	Defense *int32 `gorm:"column:defense" json:"defense"`
-	SpAtk   *int32 `gorm:"column:sp_atk" json:"sp_atk"`
-	SpDef   *int32 `gorm:"column:sp_def" json:"sp_def"`
+	ID      int32 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Hp      int32 `gorm:"column:hp;not null" json:"hp"`
+	Speed   int32 `gorm:"column:speed;not null" json:"speed"`
+	Atk     int32 `gorm:"column:atk;not null" json:"atk"`
+	Defense int32 `gorm:"column:defense;not null" json:"defense"`
+	SpAtk   int32 `gorm:"column:sp_atk;not null" json:"sp_atk"`
+	SpDef   int32 `gorm:"column:sp_def;not null" json:"sp_def"`
 }
 
 // TableName Stat's table name

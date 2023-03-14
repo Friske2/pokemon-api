@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/Friske2/pokemon-api/domain"
+	"github.com/Friske2/pokemon-api/model"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -13,15 +13,15 @@ func NewGenderRepoMock() *genderRepoMock {
 	return &genderRepoMock{}
 }
 
-func (m *genderRepoMock) FindAll(gender *[]domain.Gender) error {
+func (m *genderRepoMock) FindAll(gender *[]model.Gender) error {
 	args := m.Called()
-	*gender = args.Get(0).([]domain.Gender)
+	*gender = args.Get(0).([]model.Gender)
 	return args.Error(1)
 }
 
-func (m *genderRepoMock) GetById(id int, gender *domain.Gender) error {
+func (m *genderRepoMock) GetById(id int, gender *model.Gender) error {
 	args := m.Called()
-	*gender = args.Get(0).(domain.Gender)
+	*gender = args.Get(0).(model.Gender)
 	return args.Error(1)
 }
 func (m *genderRepoMock) Insert(name string) error {

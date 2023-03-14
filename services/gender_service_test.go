@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/Friske2/pokemon-api/domain"
+	"github.com/Friske2/pokemon-api/model"
 	"github.com/Friske2/pokemon-api/repository"
 	"github.com/Friske2/pokemon-api/services"
 	"github.com/stretchr/testify/assert"
@@ -13,8 +14,8 @@ func TestGenderRepo(t *testing.T) {
 	t.Run("FindAll", func(t *testing.T) {
 		// Arrange
 		genderRepo := repository.NewGenderRepoMock()
-		var payload []domain.Gender
-		mock := []domain.Gender{
+		var payload []model.Gender
+		mock := []model.Gender{
 			{
 				ID:   1,
 				Name: "Male",
@@ -36,8 +37,8 @@ func TestGenderRepo(t *testing.T) {
 	t.Run("GetById", func(t *testing.T) {
 		// Arrange
 		genderRepo := repository.NewGenderRepoMock()
-		var payload domain.Gender
-		mock := domain.Gender{
+		var payload model.Gender
+		mock := model.Gender{
 			ID:   1,
 			Name: "Male",
 		}
@@ -53,7 +54,7 @@ func TestGenderRepo(t *testing.T) {
 	t.Run("GetByIdNotFound", func(t *testing.T) {
 		// Arrange
 		genderRepo := repository.NewGenderRepoMock()
-		genderRepo.On("GetById").Return(domain.Gender{}, domain.ErrNotFound)
+		genderRepo.On("GetById").Return(model.Gender{}, domain.ErrNotFound)
 		// Act
 		genderService := services.NewGenderService(genderRepo)
 		// Assert
@@ -75,7 +76,7 @@ func TestGenderRepo(t *testing.T) {
 	t.Run("Update", func(t *testing.T) {
 		// Arrange
 		genderRepo := repository.NewGenderRepoMock()
-		mock := domain.Gender{
+		mock := model.Gender{
 			ID:   1,
 			Name: "Male",
 		}
@@ -91,7 +92,7 @@ func TestGenderRepo(t *testing.T) {
 	t.Run("Delete", func(t *testing.T) {
 		// Arrange
 		genderRepo := repository.NewGenderRepoMock()
-		mock := domain.Gender{
+		mock := model.Gender{
 			ID:   1,
 			Name: "Male",
 		}

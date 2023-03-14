@@ -1,6 +1,9 @@
 package services
 
-import "github.com/Friske2/pokemon-api/domain"
+import (
+	"github.com/Friske2/pokemon-api/domain"
+	"github.com/Friske2/pokemon-api/model"
+)
 
 type genderService struct {
 	genderRepo domain.GenderRepository
@@ -12,16 +15,16 @@ func NewGenderService(genderRepo domain.GenderRepository) domain.GenderService {
 	}
 }
 
-func (s *genderService) FindAll() ([]domain.Gender, error) {
-	result := []domain.Gender{}
+func (s *genderService) FindAll() ([]model.Gender, error) {
+	result := []model.Gender{}
 	res := s.genderRepo.FindAll(&result)
 	if res != nil {
 		return nil, res
 	}
 	return result, nil
 }
-func (s *genderService) GetById(id int) (domain.Gender, error) {
-	var result domain.Gender
+func (s *genderService) GetById(id int) (model.Gender, error) {
+	var result model.Gender
 	err := s.genderRepo.GetById(id, &result)
 	if err != nil {
 		return result, err

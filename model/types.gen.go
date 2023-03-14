@@ -8,8 +8,8 @@ const TableNameType = "types"
 
 // Type mapped from table <types>
 type Type struct {
-	ID   int32   `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name *string `gorm:"column:name" json:"name"`
+	ID   int32  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Name string `gorm:"column:name;not null" json:"name"`
 }
 
 // TableName Type's table name
