@@ -1,24 +1,23 @@
 package services
 
 import (
-	"time"
-
 	"github.com/Friske2/pokemon-api/domain"
 	"github.com/Friske2/pokemon-api/dto"
+	"github.com/Friske2/pokemon-api/model"
 )
 
-type MonterService struct {
+type monterService struct {
 	monterRepo domain.MontersRepository
 }
 
 func NewMontersService(m domain.MontersRepository) domain.MontersService {
-	return &MonterService{
+	return &monterService{
 		monterRepo: m,
 	}
 }
 
-func (s *MonterService) FindAll() ([]domain.Monters, error) {
-	monters := []domain.Monters{}
+func (s *monterService) FindAll() ([]model.Monter, error) {
+	monters := []model.Monter{}
 	err := s.monterRepo.FindAll(&monters)
 	if err != nil {
 		return nil, err
@@ -26,8 +25,8 @@ func (s *MonterService) FindAll() ([]domain.Monters, error) {
 	return monters, nil
 }
 
-func (s *MonterService) GetById(id int) (domain.Monters, error) {
-	monters := domain.Monters{}
+func (s *monterService) GetById(id int32) (model.Monter, error) {
+	monters := model.Monter{}
 	err := s.monterRepo.GetById(id, &monters)
 	if err != nil {
 		return monters, err
@@ -35,12 +34,9 @@ func (s *MonterService) GetById(id int) (domain.Monters, error) {
 	return monters, nil
 }
 
-func (s *MonterService) Insert(monters domain.Monters) (int, error) {
-	body := domain.Monters{
-		Name:        monters.Name,
-		CreatedDate: time.Now(),
-		CreatedBy:   "system",
-		Enabled:     true,
+func (s *monterService) Insert(monters model.Monter) (int32, error) {
+	body := model.Monter{
+		Name: monters.Name,
 	}
 	err := s.monterRepo.Insert(&body)
 	if err != nil {
@@ -49,8 +45,8 @@ func (s *MonterService) Insert(monters domain.Monters) (int, error) {
 	return body.ID, nil
 }
 
-func (s *MonterService) Update(id int, body dto.MonterValue) error {
-	monters := domain.Monters{
+func (s *monterService) Update(id int32, body dto.MonterValue) error {
+	monters := model.Monter{
 		ID: id,
 	}
 	err := s.monterRepo.GetById(id, &monters)
@@ -70,7 +66,7 @@ func (s *MonterService) Update(id int, body dto.MonterValue) error {
 	return nil
 }
 
-func (s *MonterService) Delete(id int) error {
+func (s *monterService) Delete(id int32) error {
 	err := s.monterRepo.Delete(id)
 	if err != nil {
 		return err

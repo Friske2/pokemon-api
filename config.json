@@ -1,0 +1,17 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":3000"
+  },
+  "context": {
+    "timeout": 10
+  },
+  "database": {
+    "host": "localhost",
+    "port": "5432",
+    "user": "sa",
+    "pass": "P@ssw0rd",
+    "name": "Pokemon",
+    "timezone": "Asia/Bangkok"
+  }
+}
