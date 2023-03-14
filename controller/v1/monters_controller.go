@@ -6,6 +6,7 @@ import (
 
 	"github.com/Friske2/pokemon-api/domain"
 	"github.com/Friske2/pokemon-api/dto"
+	"github.com/Friske2/pokemon-api/model"
 	"github.com/gin-gonic/gin"
 )
 
@@ -48,7 +49,7 @@ func (c *montersController) GetById(ctx *gin.Context) {
 		})
 		return
 	}
-	monter, err := c.MonterService.GetById(monterId)
+	monter, err := c.MonterService.GetById(int32(monterId))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
@@ -68,7 +69,7 @@ func (c *montersController) Insert(ctx *gin.Context) {
 		})
 		return
 	}
-	monters := domain.Monters{
+	monters := model.Monter{
 		Name: body.Name,
 	}
 	id, err := c.MonterService.Insert(monters)
@@ -103,14 +104,14 @@ func (c *montersController) Update(ctx *gin.Context) {
 		})
 		return
 	}
-	_, err = c.MonterService.GetById(monterId)
+	_, err = c.MonterService.GetById(int32(monterId))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
 		return
 	}
-	err = c.MonterService.Update(monterId, body)
+	err = c.MonterService.Update(int32(monterId), body)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
@@ -134,14 +135,14 @@ func (c *montersController) Delete(ctx *gin.Context) {
 		})
 		return
 	}
-	_, err = c.MonterService.GetById(monterId)
+	_, err = c.MonterService.GetById(int32(monterId))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),
 		})
 		return
 	}
-	err = c.MonterService.Delete(monterId)
+	err = c.MonterService.Delete(int32(monterId))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": err.Error(),

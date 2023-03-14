@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/Friske2/pokemon-api/domain"
+	"github.com/Friske2/pokemon-api/model"
 	"gorm.io/gorm"
 )
 
@@ -15,7 +16,7 @@ func NewMontersRepo(db *gorm.DB) domain.MontersRepository {
 	}
 }
 
-func (m *montersRepo) FindAll(monters *[]domain.Monters) error {
+func (m *montersRepo) FindAll(monters *[]model.Monter) error {
 	// find all
 	res := m.DB.Find(&monters)
 	if res.Error != nil {
@@ -24,7 +25,7 @@ func (m *montersRepo) FindAll(monters *[]domain.Monters) error {
 	return nil
 }
 
-func (m *montersRepo) GetById(id int, monters *domain.Monters) error {
+func (m *montersRepo) GetById(id int32, monters *model.Monter) error {
 	// find by id
 	res := m.DB.First(&monters, id)
 	if res.Error != nil {
@@ -33,7 +34,7 @@ func (m *montersRepo) GetById(id int, monters *domain.Monters) error {
 	return nil
 }
 
-func (m *montersRepo) Insert(monters *domain.Monters) error {
+func (m *montersRepo) Insert(monters *model.Monter) error {
 	// insert
 	res := m.DB.Create(&monters)
 	if res.Error != nil {
@@ -42,18 +43,18 @@ func (m *montersRepo) Insert(monters *domain.Monters) error {
 	return nil
 }
 
-func (m *montersRepo) Update(id int, body *map[string]interface{}) error {
+func (m *montersRepo) Update(id int32, body *map[string]interface{}) error {
 	// update
-	res := m.DB.Model(domain.Monters{}).Where("id = ?", id).Updates(&body)
+	res := m.DB.Model(model.Monter{}).Where("id = ?", id).Updates(&body)
 	if res.Error != nil {
 		return res.Error
 	}
 	return nil
 }
 
-func (m *montersRepo) Delete(id int) error {
+func (m *montersRepo) Delete(id int32) error {
 	// delete
-	res := m.DB.Delete(domain.Monters{}, id)
+	res := m.DB.Delete(model.Monter{}, id)
 	if res.Error != nil {
 		return res.Error
 	}

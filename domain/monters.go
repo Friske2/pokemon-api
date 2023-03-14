@@ -2,27 +2,21 @@ package domain
 
 import (
 	"github.com/Friske2/pokemon-api/dto"
+	"github.com/Friske2/pokemon-api/model"
 )
 
-type Monters struct {
-	ID       int    `json:"id"`
-	Name     string `json:"name"`
-	TypeId   int    `json:"typeId"`
-	GenderId int    `json:"genderId"`
-}
-
 type MontersRepository interface {
-	FindAll(m *[]Monters) error
-	GetById(id int, m *Monters) error
-	Insert(m *Monters) error
-	Update(id int, body *map[string]interface{}) error
-	Delete(id int) error
+	FindAll(m *[]model.Monter) error
+	GetById(id int32, m *model.Monter) error
+	Insert(m *model.Monter) error
+	Update(id int32, body *map[string]interface{}) error
+	Delete(id int32) error
 }
 
 type MontersService interface {
-	FindAll() ([]Monters, error)
-	GetById(id int) (Monters, error)
-	Insert(monters Monters) (int, error)
-	Update(id int, body dto.MonterValue) error
-	Delete(id int) error
+	FindAll() ([]model.Monter, error)
+	GetById(id int32) (model.Monter, error)
+	Insert(monters model.Monter) (int32, error)
+	Update(id int32, body dto.MonterValue) error
+	Delete(id int32) error
 }
